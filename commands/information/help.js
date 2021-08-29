@@ -32,10 +32,9 @@ module.exports = {
             };
 
             client.categories
-                .remove("hiddenCommands")
                 .forEach((value) => {
                     pages.push({
-                        title: stripIndents`**${client.betterCategoryNames.has(value) ? client.betterCategoryNames.get(value) : value[0].toUpperCase() + value.slice(1)}:**`,
+                        title: stripIndents`**${value[0].toUpperCase() + value.slice(1)}:**`,
                         value: commands(value),
                     });
                 });

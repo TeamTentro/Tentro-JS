@@ -10,14 +10,8 @@ module.exports = {
         const embed = new MessageEmbed()
             .setTitle(':ping_pong: Pong!')
             .setColor('RANDOM')
-            .addFields({
-                    name: 'Latency:',
-                    value: Date.now() - message.createdTimestamp
-                },
-                {
-                    name: 'API Latency:',
-                    value: Math.round(client.ws.ping)
-                })
+            .addField("API Latency", `${Date.now() - message.createdAt}`, true)
+            .addField("Bot Latency", `${client.ws.ping}`, true)
 
         await message.channel.send({embeds: [embed]})
     }

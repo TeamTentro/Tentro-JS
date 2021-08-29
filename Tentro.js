@@ -1,26 +1,21 @@
 const config = require('./config.json')
 require("colors");
+require('dotenv').config();
+const fs = require("fs");
 const {Client, Intents, Message, Collection} = require('discord.js');
 const client = new Client({
     intents: [
-        'GUILDS',
-        'GUILD_MEMBERS',
-        'GUILD_BANS',
-        'GUILD_EMOJIS',
-        'GUILD_INTEGRATIONS',
-        'GUILD_WEBHOOKS',
-        'GUILD_INVITES',
-        'GUILD_VOICE_STATES',
-        'GUILD_PRESENCES',
-        'GUILD_MESSAGES',
-        'GUILD_MESSAGE_REACTIONS',
-        'GUILD_MESSAGE_TYPING',
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
+        Intents.FLAGS.GUILD_BANS,
+        Intents.FLAGS.GUILD_INTEGRATIONS,
+        Intents.FLAGS.GUILD_INVITES,
+        Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.GUILD_MESSAGE_REACTIONS
     ],
     allowedMentions: ["roles", "users"],
     partials: ['USER', 'CHANNEL', 'GUILD_MEMBER', 'MESSAGE', 'REACTION']
 });
-require('dotenv').config();
-
 
 /**
  * Simple collection of all commands usage within the command handler please.
@@ -41,6 +36,7 @@ client.categories = fs.readdirSync("./commands/");
 client.aliases = new Collection();
 // Calling the UtilsMain with client so it can extend opon it
 require("./utils/UtilsMain")(client);
+require("./utils/HandlerCollection")(client);
 
 client.on('ready', () => {
     console.log('Tentro-JS Officially Deployed To The Rescue!')

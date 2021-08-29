@@ -4,7 +4,7 @@ const {promisify} = require("util");
 const readdir = promisify(require('fs').readdir);
 module.exports = async (client) => {
     client.log('Load', 'Loading commands')
-    klaw('./src/commands').on("data", (item) => {
+    klaw('./commands').on("data", (item) => {
         let category = item.path.match(/\w+(?=[\\/][\w\-.]+$)/)[0]
         const cmdFile = path.parse(item.path);
         if (!cmdFile.ext || cmdFile.ext !== ".js") return;
@@ -15,12 +15,12 @@ module.exports = async (client) => {
         }
     });
 
-    const evtFiles = await readdir('./src/events')
+    const evtFiles = await readdir('./events')
     client.log('Load', `Loading a total of ${evtFiles.length} events`)
-    klaw('./src/events').on("data", (item) => {
+    klaw('./events').on("data", (item) => {
         const evtFile = path.parse(item.path);
         if (!evtFile.ext || evtFile.ext !== ".js") return;
-        const event = require(`../src/events/${evtFile.name}${evtFile.ext}`);
+        const event = require(`../events/${evtFile.name}${evtFile.ext}`);
         client.on(evtFile.name, event.bind(null, client));
         client.log('EVENT BIND', `Event ${evtFile.name.green.bgBlack} was linked to file ${(evtFile.name + evtFile.ext).green.bgBlack}`)
     });

@@ -85,7 +85,7 @@ module.exports = (client) => {
      */
     client.loadCommand = (category, commandName, dontLog) => {
         try {
-            const props = require(`${process.cwd()}/src/commands/${category}/${commandName}`);
+            const props = require(`${process.cwd()}/commands/${category}/${commandName}`);
             if (lastCategoryLoaded !== category) {
                 client.log("Load", `Starting to load all commands from the category ${category}`);
                 lastCategoryLoaded = category;
@@ -129,7 +129,7 @@ module.exports = (client) => {
             client.aliases.delete(alias);
         });
         client.commands.delete(command.name);
-        delete require.cache[require.resolve(`${process.cwd()}/src/commands/${command.category}/${command.name}.js`)];
+        delete require.cache[require.resolve(`${process.cwd()}/commands/${command.category}/${command.name}.js`)];
         return {
             res: [command.category, command.name]
         };
