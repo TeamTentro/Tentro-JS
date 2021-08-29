@@ -49,7 +49,7 @@ require("./utils/UtilsMain")(client);
 require("./utils/HandlerCollection")(client);
 
 client.on('ready', () => {
-    console.log('Tentro-JS Officially Deployed To The Rescue!')
+    console.log('Tentro is online and active.')
 
 })
 
