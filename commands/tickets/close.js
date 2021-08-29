@@ -33,7 +33,7 @@ module.exports = {
 					
 
                     const embed = new MessageEmbed()
-                        .setDescription(`[\`📄 View\`](${sbin.url})`)
+                        .setDescription(`**Here's your freshly baked transcript for ${channel.name}!\n[\📄 View\](${sbin.url})**`)
                         .setColor('GREEN');
                     ticket_member.user.send({ content: `Here is a transcript of your ticket, please click the link below to vew the transcript`, embeds: [embed] }); 
 				}).then(() => {
