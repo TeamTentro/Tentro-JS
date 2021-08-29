@@ -4,6 +4,7 @@
   "description": "",
   "main": "tentro.js",
   "scripts": {
+    "main": "node tentro.js",
     "start": "nodemon"
   },
   "author": "",
@@ -17,5 +18,8 @@
     "klaw": "^3.0.0",
     "moment": "^2.29.1",
     "sourcebin_js": "^0.0.3-ignore"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
