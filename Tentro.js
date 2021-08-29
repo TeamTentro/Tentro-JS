@@ -30,7 +30,7 @@ client.settings;
 /**
  * Global variable for the client owners/developers.
  */
- client.owners = client.settings.owners;
+ client.owners = config.owners;
 
 /**
  * all categories (folders) from the commands folder as a string array.
