@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Tentro 👋</h1>
+<h1 align="center">This Is Tentro 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-0 Dev-blue.svg?cacheSeconds=2592000" />
   <a href="#" target="_blank">
@@ -16,16 +16,10 @@
 yarn install
 ```
 
-## Usage
+## Figure out how to use Tentro
 
-```sh
-t!help
 ```
-
-## Run tests
-
-```sh
-yarn run test
+t!help
 ```
 
 ## Author
@@ -37,4 +31,4 @@ yarn run test
 
 ## Show your support
 
-Give a ⭐️ if this project helped you!
+Drop us a ⭐️ if you like this project!
