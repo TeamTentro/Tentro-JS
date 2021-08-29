@@ -13,8 +13,9 @@ module.exports = {
             const channel = args.slice(1).join(" ")
             let currentCategoryID = message.channel.parent.id
             if(!channel) return message.channel.send("Please specify a channel name to be created!")
-            message.guild.channels.create(`${channel}`, { type: 'text', parent: `${currentCategoryID}` });
-            message.channel.send("Successfully created channel ") 
+            message.guild.channels.create(`${channel}`, { type: 'text', parent: `${currentCategoryID}` }).then(c => message.channel.send(`Successfully created channel <#${c.id}> <a:ticktentro:881535612312756276>`))
+        
+            
             
         };
             
