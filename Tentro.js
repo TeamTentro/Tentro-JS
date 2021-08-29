@@ -21,19 +21,28 @@ const client = new Client({
  * Simple collection of all commands usage within the command handler please.
  */
 client.commands = new Collection()
+
 /**
  * Global variable for the config usage: client.settings.prefix for example
  */
 client.settings;
+
+/**
+ * Global variable for the client owners/developers.
+ */
+ client.owners = client.settings.owners;
+
 /**
  * all categories (folders) from the commands folder as a string array.
  */
 client.categories = fs.readdirSync("./commands/");
+
 /**
  * Commands but... the alternative names?
  * its basically an array of the possible aliases for the command
  */
 client.aliases = new Collection();
+
 // Calling the UtilsMain with client so it can extend opon it
 require("./utils/UtilsMain")(client);
 require("./utils/HandlerCollection")(client);
