@@ -4,10 +4,11 @@ module.exports = {
     aliases: [""],
     category: "moderation",
     description: "Deletes or creates a channel.",
-    usage: "",
-    permissions: "Manage Messages",
+    usage: "t!channel <create> | <delete> <channel.mention>",
+    permissions: "Manage Channels",
     exec: async (client, message, args) => {
-        if (!message.member.permissions.has("MANAGE_CHANNELS")) return message.channel.send("You dont have the required permissions to use this command!")
+        if (!message.member.permissions.has("MANAGE_CHANNELS")) return message.channel.send("You dont have the required permissions to use this command!").then(msg => {
+            setTimeout(() => msg.delete(), 5000)})
         
         if(args[0] === "create") {
             const channel = args.slice(1).join(" ")

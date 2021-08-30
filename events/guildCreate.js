@@ -9,7 +9,7 @@ module.exports = async (client, guild) => {
          .setTitle("**Guild Added**")
          .setDescription(`Tentro has been added to ${guild.name} (${guild.id})`)
          .addField("Members: ", guild.memberCount.toString())
-         .setImage(guild.iconURL())
+         .setThumbnail(guild.iconURL())
          .setColor(0xff0000)
          const invite = (await guild.invites.fetch()).first()
          console.log(invite)
