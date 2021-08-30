@@ -23,27 +23,41 @@ module.exports = {
 // if there is no reason specified
         if (!args[1]) { 
             let targeteduser = message.guild.members.cache.get(target.id)
+            let guildname = message.guild.name
+            let kickuser = new MessageEmbed()
+             .setTitle(`You have been kicked from ${guildname}`)
+             .setColor(0xff0000)
+             .setTimestamp()
+             .setDescription(`Reason: ${specreason}`)
+             targeteduser.send({ embeds: [kickuser]})
             targeteduser.kick()
-            let banembed = new MessageEmbed()
+            let kickembed = new MessageEmbed()
              .setTitle("Kick")
             .setColor(0xff0000)
             .setTimestamp()
             .setDescription(`${spectarget} has been kicked!`)
-            message.channel.send({ embeds: [banembed]})
+            message.channel.send({ embeds: [kickembed]})
            
 
         }
 
-        else { // if time is specified
+        else { // if reason is specified
             let specreason = args.slice(1).join(" ")
             let targeteduser = message.guild.members.cache.get(target.id)
+            let guildname = message.guild.name
+            let kickuser = new MessageEmbed()
+             .setTitle(`You have been kicked from ${guildname}`)
+             .setColor(0xff0000)
+             .setTimestamp()
+             .setDescription(`Reason: ${specreason}`)
+             targeteduser.send({ embeds: [kickuser]})
             targeteduser.kick({reason: `${specreason}`})
-            let banembed = new MessageEmbed()
+            let kickembed = new MessageEmbed()
              .setTitle("Kick")
             .setColor(0xff0000)
             .setTimestamp()
             .setDescription(`${spectarget} has been kicked!\nReason: ${specreason}`)
-            message.channel.send({ embeds: [banembed]})
+            message.channel.send({ embeds: [kickembed]})
             
         }
             
