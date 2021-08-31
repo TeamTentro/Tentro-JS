@@ -20,7 +20,7 @@ module.exports = {
                 : `disabled`
         }
 
-        if (message.member.permissions.has("MANAGE_MESSAGES")) {
+        if (!message.member.permissions.has("MANAGE_MESSAGES")) {
             return message.channel.send("You dont have the required permissions to use this command!").then(msg => {
                 setTimeout(() => msg.delete(), 5000)
             })
