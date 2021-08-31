@@ -48,7 +48,7 @@ module.exports = {
             };
 
             if (!message.guild.me.permissions.has("ADD_REACTIONS")) {
-                embed.setFooter("Missing he permissions \`ADD_REACTIONS\` Making the help command useless. So here is an list view:");
+                embed.setFooter("Missing the permissions \`ADD_REACTIONS\` Making the help command useless. So here is an list view:");
                 embed.setDescription(client.categories
                     .remove("hiddenCommands")
                     .map(value => stripIndents`**${client.betterCategoryNames.has(value) ? client.betterCategoryNames.get(value) : value[0].toUpperCase() + value.slice(1)}:** \n ${commands(value)}`)

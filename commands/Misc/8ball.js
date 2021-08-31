@@ -11,9 +11,9 @@ module.exports = {
         "Perhaps.",
         "Maybe, ehhh don't take my word for it.",
         "Ask again.",
-        "How do you not know this.", "I don't know, im just a discord bot.",
+        "How do you not know this.", "I don't know, I'm just a Discord Bot.",
         "No clue bro.",
-        "Uhhh Not sure about the answer to that one.", "My reply is no.",
+        "Uhhh not sure about the answer to that one.", "My reply is no.",
         "My sources say no.",
         "Outlook not so good.",
         "Very doubtful.", "My sources say yes."]

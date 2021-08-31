@@ -20,6 +20,7 @@ module.exports = {
                 : `disabled`
         }
 
+
         if (!message.member.permissions.has("MANAGE_MESSAGES")) {
             return message.channel.send("You dont have the required permissions to use this command!").then(msg => {
                 setTimeout(() => msg.delete(), 5000)
@@ -32,6 +33,7 @@ module.exports = {
                 message.channel.send("Slowmode in this channel is now disabled!")
                 break
             }
+
 
             case "max": {
                 message.channel.setRateLimitPerUser(21600)

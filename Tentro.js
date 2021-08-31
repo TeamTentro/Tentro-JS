@@ -50,6 +50,7 @@ require("./utils/HandlerCollection")(client);
 
 client.on('ready', () => {
     console.log('Tentro is online and active.')
+    client.user.setActivity(`${client.guilds.cache.size} servers`, { type: 'WATCHING' });
 
 })
 
