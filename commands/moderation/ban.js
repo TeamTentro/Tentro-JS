@@ -22,7 +22,14 @@ module.exports = {
         const spectarget = `<@${target.id}>`
 // if there is no reason specified
         if (!args[1]) { 
-            let targeteduser = message.guild.members.cache.get(target.id)
+            let targeteduser = await message.guild.members.fetch(target.id)
+            let guildname = message.guild.name
+            let banuser = new MessageEmbed()
+             .setTitle(`You have been banned from ${guildname}`)
+             .setColor(0xff0000)
+             .setTimestamp()
+             .setDescription(`Reason: ${specreason}`)
+             targeteduser.send({ embeds: [banuser]})
             targeteduser.ban()
             let banembed = new MessageEmbed()
              .setTitle("Ban")
@@ -36,7 +43,15 @@ module.exports = {
 
         else { // if time is specified
             let specreason = args.slice(1).join(" ")
-            let targeteduser = message.guild.members.cache.get(target.id)
+            let targeteduser = await message.guild.members.fetch(target.id)
+            let guildname = message.guild.name
+            let banuser = new MessageEmbed()
+             .setTitle(`You have been banned from ${guildname}`)
+             .setColor(0xff0000)
+             .setTimestamp()
+             .setDescription(`Reason: ${specreason}`)
+             targeteduser.send({ embeds: [banuser]})
+
             targeteduser.ban({reason: `${specreason}`})
             let banembed = new MessageEmbed()
              .setTitle("Ban")
