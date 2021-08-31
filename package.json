@@ -17,6 +17,7 @@
     "fs": "^0.0.1-security",
     "klaw": "^3.0.0",
     "moment": "^2.29.1",
+    "mongoose": "^6.0.3",
     "sourcebin_js": "^0.0.3-ignore"
   },
   "devDependencies": {
