@@ -8,9 +8,11 @@ module.exports = {
     permissions: "Manage_Channels",
     exec: async (client, message, args) => {
 
-        if (!message.member.permissions.has("MANAGE_CHANNELS")) return message.channel.send("You dont have the required permissions to use this command!").then(msg => {
+        if (!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("You dont have the required permissions to use this command!").then(msg => {
             setTimeout(() => msg.delete(), 5000)})
         if (!args[0]) return message.reply("Please specify a number for the slowmode")
+
+// manage messages cause its the perm that makes you immune to slow
 
 
         let dur2 = args[0].toString()    
