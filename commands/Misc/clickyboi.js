@@ -4,21 +4,22 @@ module.exports = {
     name: "docs",
     aliases: ["documentation"],
     category: "information",
-    description: "READ THE DOCS READ THE DOCS",
+    description: "read the docs",
     usage: "t!docs",
     permissions: "EVERYONE",
     exec: async (client, message, args) => {
         const row = new MessageActionRow()
         .addComponents(
                     new MessageButton()
-                            .setLabel('📄 Discord.js docs')
+                            .setEmoji('📄')
+                            .setLabel('discord.js docs')
                             .setStyle('LINK')
                             .setURL('https://discord.js.org/#/docs/main/stable')
         );
         const embed = new MessageEmbed()
-            .setTitle('Discords.js docs')
+            .setTitle('discord.js docs')
             .setDescription('Click the button below to access the discord.js docs.')
-            .setColor('RANDOM')
+            .setColor('GREEN')
             
             
 
