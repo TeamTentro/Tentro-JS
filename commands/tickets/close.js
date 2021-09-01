@@ -38,17 +38,7 @@ module.exports = {
                     ticket_member.user.send({ content: `Here is a transcript of your ticket, please click the link below to vew the transcript`, embeds: [embed] }); 
 				}).then(() => {
 					try {
-						message.channel.setName(`closed-${ticket_member.user.username}`)
-						message.channel.permissionOverwrites.edit(ticket_member.user, {
-							VIEW_CHANNEL: false,
-							SEND_MESSAGES: false,
-							ATTACH_FILES: false,
-							READ_MESSAGE_HISTORY: false,
-						}).then(() => {
-							message.channel.send({ content: `Successfully closed ${message.channel}` });
-						}).catch((
-							err => message.reply(`there was an error closing the ticket: ${err}`)
-						))
+						message.channel.delete();
 					}
 					catch(e) {
 						console.log(e);
@@ -58,7 +48,7 @@ module.exports = {
 			}
 		}
 		else {
-			return message.reply('you cannot use this command here. Please use this command when you\'re closing a ticket.');
+			return message.reply('You cannot use this command here. Please use this command when you\'re closing a ticket.');
 		}
 	},
 };
