@@ -4,15 +4,15 @@ module.exports = {
     aliases: ["b"],
     category: "moderation",
     description: "Bans user from the server.",
-    usage: "",
+    usage: "t!ban <member> [reason]",
     permissions: "Ban_Members",
     exec: async (client, message, args) => {
         
-        const {member, mentions} = message
-        const tag = `<@${member.id}>`
-        if (!message.member.permissions.has("ADMINISTRATOR")||(!message.member.permissions.has("BAN_MEMBERS"))) return message.channel.send("You dont have the required permissions to use this command!").then(msg => {
+        
+        if (!message.member.permissions.has("ADMINISTRATOR") && (!message.member.permissions.has("BAN_MEMBERS"))) {return message.channel.send("You dont have the required permissions to use this command!").then(msg => {
             setTimeout(() => msg.delete(), 5000)})
-        let target = message.mentions.members.first() || message.guild.members.cache.get(args[0]) // now we can use member id     
+        }
+        let target = message.mentions.members.first() || await message.guild.members.fetch(args[0]) // now we can use member id     
         
         if (!target) return message.reply("Please specify a member for ban!")
 
@@ -20,7 +20,8 @@ module.exports = {
             setTimeout(() => msg.delete(), 5000)})
 
         const spectarget = `<@${target.id}>`
-// if there is no reason specified
+        let specreason = args.slice(1).join(" ")
+        // if there is no reason specified
         if (!args[1]) { 
             let targeteduser = await message.guild.members.fetch(target.id)
             let guildname = message.guild.name
@@ -28,7 +29,6 @@ module.exports = {
              .setTitle(`You have been banned from ${guildname}`)
              .setColor(0xff0000)
              .setTimestamp()
-             .setDescription(`Reason: ${specreason}`)
              targeteduser.send({ embeds: [banuser]})
             targeteduser.ban()
             let banembed = new MessageEmbed()
@@ -39,10 +39,10 @@ module.exports = {
             message.channel.send({ embeds: [banembed]})
 
 
-        }
+         }
 
         else { // if time is specified
-            let specreason = args.slice(1).join(" ")
+            const specreason = args.slice(1).join(" ")
             let targeteduser = await message.guild.members.fetch(target.id)
             let guildname = message.guild.name
             let banuser = new MessageEmbed()
@@ -69,7 +69,7 @@ module.exports = {
        
             
             
-        }
+    } // TESTED AND WORKING!!
             
        
         

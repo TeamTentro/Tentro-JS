@@ -17,7 +17,7 @@ module.exports = {
         "My sources say no.",
         "Outlook not so good.",
         "Very doubtful.", "My sources say yes."]
-        if (!question[1]) return message.reply("Please ask a question")
+        if (!question[0]) return message.reply("Please ask a question")
         let result = Math.floor((Math.random() * responses.length))
         let askedq = question.slice(0).join(" ")
         
@@ -27,8 +27,5 @@ module.exports = {
         .addField("Question: ", `${askedq}`)
         .addField("Response: ", `${responses[result]}`)
         message.channel.send({ embeds: [ballembed] })
-
-
-        
     }
 }

@@ -8,7 +8,7 @@ module.exports = {
     permissions: "Ban_Members",
     exec: async (client, message, args) => {
        
-        if (!message.member.permissions.has("ADMINISTRATOR")||(!message.member.permissions.has("BAN_MEMBERS"))) return message.channel.send("You dont have the required permissions to use this command!").then(msg => {
+        if (!message.member.permissions.has("ADMINISTRATOR") && (!message.member.permissions.has("BAN_MEMBERS"))) return message.channel.send("You dont have the required permissions to use this command!").then(msg => {
             setTimeout(() => msg.delete(), 5000)})
         if (!args[0]) return message.reply("Please specify a member as the first argument!")
         if (!args[1]) return message.reply("Please specify role id or role mention as second argument")
