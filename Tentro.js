@@ -50,6 +50,11 @@ client.categories = fs.readdirSync("./commands/");
  */
 client.aliases = new Collection();
 
+/**
+ * Config object mostly used for checking if someone is dev or something idk
+ */
+client.config = require("./utils/Config")(client);
+
 // Calling the UtilsMain with client so it can extend opon it
 require("./utils/UtilsMain")(client);
 require("./utils/HandlerCollection")(client);
@@ -61,11 +66,11 @@ mongoose.connect(process.env.MONGO_URI, {
 }).then(() => {
     client.log('Load', 'Connected to MongoDB.')
 }).catch((err) => {
-    console.log('ERROR','Unable to connect to MongoDB Database.\nError: ' + err)
+    client.log('ERROR','Unable to connect to MongoDB Database.\nError: ' + err)
 })
 
 client.on('ready', () => {
-    
+
     client.log('Ready', 'Tentro is online and active.!')
     client.user.setActivity(`${client.guilds.cache.size} servers`, { type: 'WATCHING' });
 

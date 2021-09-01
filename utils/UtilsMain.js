@@ -62,8 +62,8 @@ module.exports = (client) => {
      * Get a member from a nickname id or mention. (FUCK YEAH PREMIUM!)
      * @param {Client} client - Client object.
      * @param {Message} message - Message object to get information from.
-     * @param {String[]} args - String array of the args
-     * @param {Number} argsIndex - From where to pick the message to check in the args.
+     * @param {string[]} args - String array of the args
+     * @param {number} argsIndex - From where to pick the message to check in the args.
      * @returns {Promise<*>} - The user OR an error.
      */
     client.memberSearch = async function (client, message, args, argsIndex) {
