@@ -10,8 +10,8 @@ module.exports = {
 	permissions: 'SEND_MESSAGES',
 	exec: async (client, message, args) => {
 		if(message.channel.name.includes('ticket-')) {
-			const ticket_member = message.guild.members.cache.get(message.channel.name.split('ticket-').join(''));
-			if(message.member.permissions.has('ADMINISTRATOR') || message.channel.name === `ticket-${message.author.id}`) {
+		const ticket_member = (await message.guild.members.fetch()).find(m => m.user.username.toLowerCase() === message.channel.name.slice(7));
+            if(message.member.permissions.has('ADMINISTRATOR') || message.channel.name === `ticket-${message.author.username.toLowerCase()}`) {
 				message.channel.messages.fetch().then(async (messages) => {
 					const output = messages.map(m => `${new Date(m.createdAt).toLocaleString('en-US')} - ${m.author.discriminator}: ${m.attachments.size > 0 ? m.attachments.first().proxyURL : m.content}`).reverse().join('\n');
 
@@ -33,21 +33,12 @@ module.exports = {
 					
 
                     const embed = new MessageEmbed()
-                        .setDescription(`**Here's your freshly baked transcript for ${channel.name}!\n[\📄 View\](${sbin.url})**`)
+                        .setDescription(`**Here's your freshly baked transcript for ${message.channel.name}!\n[\📄 View\](${sbin.url})**`)
                         .setColor('GREEN');
                     ticket_member.user.send({ content: `Here is a transcript of your ticket, please click the link below to vew the transcript`, embeds: [embed] }); 
 				}).then(() => {
 					try {
-						message.channel.permissionOverwrites.edit(ticket_member.user, {
-							VIEW_CHANNEL: false,
-							SEND_MESSAGES: false,
-							ATTACH_FILES: false,
-							READ_MESSAGE_HISTORY: false,
-						}).then(() => {
-							message.channel.send({ content: `Successfully closed ${message.channel}` });
-						}).catch((
-							err => message.reply(`there was an error closing the ticket: ${err}`)
-						))
+						message.channel.delete();
 					}
 					catch(e) {
 						console.log(e);
@@ -57,7 +48,7 @@ module.exports = {
 			}
 		}
 		else {
-			return message.reply('you cannot use this command here. Please use this command when you\'re closing a ticket.');
+			return message.reply('You cannot use this command here. Please use this command when you\'re closing a ticket.');
 		}
 	},
 };
