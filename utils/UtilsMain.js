@@ -1,4 +1,4 @@
-const {Client, Message, GuildMember} = require("discord.js");
+const {Client, Message, GuildMember, Snowflake} = require("discord.js");
 const moment = require("moment");
 /**
  * Big boi collection of all commands used within the client globally, Usage: client.loadCommands(...)
@@ -23,35 +23,33 @@ module.exports = (client) => {
 
 
     /**
-     * The actual getMember function where it searched everything.
+     * A function usefull for getting a guild member by either the:
+     * 1. ID (Snowflake)
+     * 2. Mention
+     * 3. Name
      * @param {Message} message - Message to get information from.
      * @param {String} toFind - Anything, ID, Username or Mention
      * @returns {GuildMember | string} - Member or error containing that no member was found.
      */
     client.getMember = async function (message, toFind = '') {
 
-        if (!toFind)
-            return "NOT_FOUND";
-
         toFind = toFind.toLowerCase();
         let target;
-        try {
-            target = await message.guild.members.fetch(toFind);
-            console.log(target + "Found?");
-        } catch (e) {
-        }
-        if (!target && message.mentions.members)
-            target = message.mentions.members.first();
-        console.log(target + "Found? but mentioned?");
 
         if (!target && toFind) {
             target = await (await message.guild.members.fetch()).filter((member, id) => {
                 return member.displayName.toLowerCase().includes(toFind) ||
                     member.user.tag.toLowerCase().includes(toFind)
             }).first();
-
-            console.log(target + "Found? but searching per name?");
         }
+
+        if (!target && message.mentions.members)
+            target = message.mentions.members.first();
+
+        if(!target)
+            try { target = await message.guild.members.fetch(toFind) } catch (e) {};
+
+
         if (!target)
             target = "NOT_FOUND";
 
@@ -60,17 +58,18 @@ module.exports = (client) => {
 
     /**
      * Get a member from a nickname id or mention. (FUCK YEAH PREMIUM!)
-     * @param {Client} client - Client object.
      * @param {Message} message - Message object to get information from.
      * @param {string[]} args - String array of the args
      * @param {number} argsIndex - From where to pick the message to check in the args.
      * @returns {Promise<*>} - The user OR an error.
      */
-    client.memberSearch = async function (client, message, args, argsIndex) {
+    client.memberSearch = async function (message, args, argsIndex) {
         let user = await client.getMember(message, args[argsIndex])
+        console.log(user);
         if (user === "NOT_FOUND") {
             await message.reply("This user was not found.");
         } else {
+            console.log(user);
             return user;
         }
     };
@@ -133,5 +132,35 @@ module.exports = (client) => {
         return {
             res: [command.category, command.name]
         };
+    };
+
+    /**
+     * Get the perm level for the user
+     * @param {Message} message
+     * @param {GuildMember} member
+     * @returns {number}
+     */
+    client.getPermLevel = (message, member) => {
+        let permlvl = 0;
+
+        if (!member && !message) return 0;
+
+
+        const permOrder = client.config.permLevels
+            .slice(0)
+            .sort((p, c) => (p.level < c.level ? 1 : -1));
+
+        while (permOrder.length > 0) {
+            const currentLevel = permOrder.shift();
+
+            if (currentLevel === undefined) break;
+
+            if (currentLevel.check(message, member)) {
+                console.log(currentLevel.level);
+                permlvl = currentLevel.level;
+                break;
+            }
+        }
+        return permlvl;
     };
 }

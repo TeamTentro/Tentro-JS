@@ -1,4 +1,3 @@
-const config = require('./config.json')
 require("colors");
 require('dotenv').config();
 const fs = require("fs");
@@ -35,9 +34,9 @@ client.settings;
 client.db = require('./database/Mongo.js');
 
 /**
- * Global variable for the client owners/developers.
+ * Config object mostly used for checking if someone is dev or something idk
  */
- client.owners = config.owners;
+client.config = require("./utils/Config")(client);
 
 /**
  * all categories (folders) from the commands folder as a string array.
@@ -53,10 +52,14 @@ client.aliases = new Collection();
 // Calling the UtilsMain with client so it can extend opon it
 require("./utils/UtilsMain")(client);
 require("./utils/HandlerCollection")(client);
-/**
- * Config object mostly used for checking if someone is dev or something idk
- */
-client.config = require("./utils/Config")(client);
+
+
+client.levelCache = {};
+
+for (let i = 0; i < client.config.permLevels.length; i++) {
+    const thisLevel = client.config.permLevels[i];
+    client.levelCache[thisLevel.name] = thisLevel.level;
+}
 
  // Connect to the database
 mongoose.connect(process.env.MONGO_URI, {
@@ -67,12 +70,11 @@ mongoose.connect(process.env.MONGO_URI, {
 }).catch((err) => {
     client.log('ERROR','Unable to connect to MongoDB Database.\nError: ' + err)
 })
-
-client.on('ready', () => {
-
-    client.log('Ready', 'Tentro is online and active!')
-    client.user.setActivity(`${client.guilds.cache.size} servers`, { type: 'WATCHING' });
-
-})
+//
+// client.on('ready', async () => {
+//     client.log('Ready', 'Tentro is online and active!')
+//     client.user.setActivity(`${client.guilds.cache.size} servers`, { type: 'WATCHING' });
+//
+// })
 
 client.login(process.env.TOKEN);

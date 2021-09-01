@@ -8,7 +8,7 @@ module.exports = {
     category: "information",
     description: "Returns all commands, or one specific command info",
     usage: "[command | alias]",
-    permissions: "EVERYONE",
+    permissionLevel: "Bot Dev",
     exec: async (client, message, args) => {
         if (args[0]) {
             return getCMD(client, message, args[0]);
@@ -22,7 +22,7 @@ module.exports = {
                 // Future note: is empty is just an category mismatch
                 return client.commands
                     .filter(cmd => cmd.category === category)
-                    .map(cmd => cmd.hidden === true ? "" : `\`${cmd.name} ${(cmd.note) ? cmd.note : ""}(${cmd.permissions})\``)
+                    .map(cmd => cmd.hidden === true ? "" : `\`${cmd.name} ${(cmd.note) ? cmd.note : ""}(${cmd.permissionLevel})\``)
                     .join(", ");
             };
             let pages = [];
@@ -51,7 +51,7 @@ module.exports = {
                 embed.setFooter("Missing the permissions \`ADD_REACTIONS\` Making the help command useless. So here is an list view:");
                 embed.setDescription(client.categories
                     .remove("hiddenCommands")
-                    .map(value => stripIndents`**${client.betterCategoryNames.has(value) ? client.betterCategoryNames.get(value) : value[0].toUpperCase() + value.slice(1)}:** \n ${commands(value)}`)
+                    .map(value => stripIndents`**${value[0].toUpperCase() + value.slice(1)}:** \n ${commands(value)}`)
                     .join(" "))
                 return;
             }

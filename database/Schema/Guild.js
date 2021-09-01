@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const {Snowflake} = require("discord.js");
 
 module.exports = mongoose.model("Guild", new mongoose.Schema({
 
@@ -20,6 +21,11 @@ module.exports = mongoose.model("Guild", new mongoose.Schema({
             message: null, // Custom message
             image: false, // Check if image is enabled
             embed: false // Check if embed is enabled
+        },
+        roles: {
+            helper: Snowflake,
+            moderator: Snowflake,
+            administrator: Snowflake
         }
     }}
 
