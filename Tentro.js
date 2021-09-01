@@ -66,7 +66,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 client.on('ready', () => {
     
-    client.log('Ready', 'Tentro is online and active.!')
+    client.log('Ready', 'Tentro is online and active!')
     client.user.setActivity(`${client.guilds.cache.size} servers`, { type: 'WATCHING' });
 
 })
