@@ -62,8 +62,6 @@ module.exports = async (client, message) => {
                     //         //     break;
                     //     }
                     // } else {
-                        client.log("yeet", level);
-                        client.log("yeet", client.levelCache[command.permissionLevel]);
                         if (level < client.levelCache[command.permissionLevel]) return message.reply(`Fucker you failed because you're missing ${client.config.permLevels.filter((l) => l.level === client.levelCache[command.permissionLevel])[0].name}`);
                         command.exec(client, message, args);
                     // }

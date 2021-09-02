@@ -156,7 +156,6 @@ module.exports = (client) => {
             if (currentLevel === undefined) break;
 
             if (currentLevel.check(message, member)) {
-                console.log(currentLevel.level);
                 permlvl = currentLevel.level;
                 break;
             }
