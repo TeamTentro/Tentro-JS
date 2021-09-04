@@ -9,22 +9,22 @@ module.exports = {
     exec: async (client, message, args) => {
 
 
-        // if (!message.member.permissions.has("ADMINISTRATOR") && (!message.member.permissions.has("BAN_MEMBERS"))) {return message.channel.send("You dont have the required permissions to use this command!").then(msg => {
-        //     setTimeout(() => msg.delete(), 5000)})
-        // }
+        if (!message.member.permissions.has("ADMINISTRATOR") && (!message.member.permissions.has("BAN_MEMBERS"))) {return message.channel.send("You dont have the required permissions to use this command!").then(msg => {
+             setTimeout(() => msg.delete(), 5000)})
+         }
 
 
         let target = await client.getMember(message, args[0]);
         console.log(target);
         if(!target || target === "NOT_FOUND") return message.reply("boi something is wrong.");
 
-        // if (target.permissions.has("ADMINISTRATOR")||(target.permissions.has("BAN_MEMBERS"))) return message.channel.send("You cant ban users with your permissions or higher!").then(msg => {
-        //     setTimeout(() => msg.delete(), 5000)})
+        if (target.permissions.has("ADMINISTRATOR")||(target.permissions.has("BAN_MEMBERS"))) return message.channel.send("You cant ban users with your permissions or higher!").then(msg => {
+            setTimeout(() => msg.delete(), 5000)})
 
         let specreason = args.slice(1).join(" ")
         // if there is no reason specified
         if (!args[1]) {
-            // let targeteduser = await message.guild.members.fetch(target.id)
+            let targeteduser = await message.guild.members.fetch(target.id)
             let guildname = message.guild.name
             let banuser = new MessageEmbed()
              .setTitle(`You have been banned from ${guildname}`)
@@ -46,7 +46,7 @@ module.exports = {
 
         else { // if time is specified
             const specreason = args.slice(1).join(" ")
-            // let targeteduser = await message.guild.members.fetch(target.id)
+            let targeteduser = await message.guild.members.fetch(target.id)
             let guildname = message.guild.name
             let banuser = new MessageEmbed()
              .setTitle(`You have been banned from ${guildname}`)
