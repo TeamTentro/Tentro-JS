@@ -1,5 +1,6 @@
 const {MessageEmbed} = require('discord.js')
-const discord = require('discord.js')
+const discord = require('discord.js');
+const { set } = require('lodash');
 module.exports = {
     name: "guilds",
     aliases: ["gd"],
@@ -9,15 +10,17 @@ module.exports = {
     permissions: "EVERYONE",
     exec: async (client, message) => {
        
-        client.guilds.cache.map(guild => `${guild.name} (${guild.id})`).join('\n')
+
         const embed = new MessageEmbed()
         .setColor(0xff0000)
-        .setTitle(client.guilds.cache.map(guild => `${guild.name} (${guild.id})`).join('\n')
+        .setTitle(`These are the servers the bot is currently in (${client.guilds.cache.size}) !`)
+        .setDescription(client.guilds.cache.map(guild => `${guild.name} - ID: (${guild.id})`).join('\n')
         
         )
         message.channel.send( {embeds: [embed] });
-            
+
         
+    
         
     }
 }
