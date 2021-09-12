@@ -26,7 +26,7 @@ t!help
 
 👤 **Tentro Dev Team**
 
-* Website: https://discord.gg/zyms32wdgd
+* Support Server: https://discord.gg/zyms32wdgd
 * Github: [@TentroBot](https://github.com/TentroBot)
 
 ## Show your support
