@@ -81,4 +81,5 @@ const checks = [
 	}
 	console.log(chalk.yellow("\n\nThank you for developing Tentro. If you need more help, contact the core devs."));
 	console.log(chalk.blue("\n\nIf you got to this point, grats, no errors were detected by the system. We now advise you to run `node .` to start the bot"));
+	process.exit(0);
 })();
