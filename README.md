@@ -10,12 +10,16 @@
 
 ### 🏠 [Homepage](https://discord.gg/zyms32wdgd)
 
-## Install
+## Development
 
 ```sh
-yarn install
+yarn
 ```
-
+---
+```sh
+cd scripts
+node .\verify-setup.js
+```
 ## Figure out how to use Tentro
 
 ```
