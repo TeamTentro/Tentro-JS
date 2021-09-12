@@ -19,7 +19,9 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "mongoose": "^6.0.3",
-    "sourcebin_js": "^0.0.3-ignore"
+    "quick.db": "^7.1.3",
+    "sourcebin_js": "^0.0.3-ignore",
+    "trello": "^0.10.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
