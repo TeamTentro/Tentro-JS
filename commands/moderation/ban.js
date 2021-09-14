@@ -1,80 +1,49 @@
 const {MessageEmbed} = require('discord.js')
 module.exports = {
     name: "ban",
-    aliases: ["b"],
+    aliases: ["b", "yeet"],
     category: "moderation",
-    description: "Bans user from the server.",
+    description: "Bans the mentioned member from the server.",
     usage: "t!ban <member> [reason]",
     permissions: "Administrator",
     exec: async (client, message, args) => {
 
-
-        if (!message.member.permissions.has("ADMINISTRATOR") && (!message.member.permissions.has("BAN_MEMBERS"))) {return message.channel.send("You dont have the required permissions to use this command!").then(msg => {
-             setTimeout(() => msg.delete(), 5000)})
-         }
-
-
+        if (!message.member.permissions.has("ADMINISTRATOR") && (!message.member.permissions.has("BAN_MEMBERS"))) return message.channel.send("You dont have the required permissions to use this command!").then(msg => {
+            setTimeout(() => msg.delete(), 5000)})
+        
         let target = await client.getMember(message, args[0]);
         console.log(target);
         if(!target || target === "NOT_FOUND") return message.reply("boi something is wrong.");
 
         if (target.permissions.has("ADMINISTRATOR")||(target.permissions.has("BAN_MEMBERS"))) return message.channel.send("You cant ban users with your permissions or higher!").then(msg => {
             setTimeout(() => msg.delete(), 5000)})
+            
+        // if there is no reason specified, its empty
+        let reason = args[1] ? args.slice(1).join(" ") : ''
+        
+        let targetedUser = await message.guild.members.fetch(target.id)
+        let guildName = message.guild.name
+        
+        let banUserEmbed = new MessageEmbed()
+            .setTitle(`You have been banned from ${guildName}`)
+            .setColor(0xff0000)
+            .setTimestamp()
+        
+        if (reason) banUserEmbed.setDescription(`Reason: ${specreason}`)
 
-        let specreason = args.slice(1).join(" ")
-        // if there is no reason specified
-        if (!args[1]) {
-            let targeteduser = await message.guild.members.fetch(target.id)
-            let guildname = message.guild.name
-            let banuser = new MessageEmbed()
-             .setTitle(`You have been banned from ${guildname}`)
-             .setColor(0xff0000)
-             .setTimestamp()
-            target.send({ embeds: [banuser]}).then(() => {
-                target.ban();
-             });
+        target.send({ embeds: [banUserEmbed]}).then(() => {
+            reason ? target.ban() : target.ban({ reason })
+        });
 
-            let banembed = new MessageEmbed()
-             .setTitle("Ban")
+        let banEmbed = new MessageEmbed()
+            .setTitle("Ban")
             .setColor(0xff0000)
             .setTimestamp()
             .setDescription(`${target} has been banned!`)
-            message.channel.send({ embeds: [banembed]})
+        
+        if (reason) banEmbed.setDescription(`${target} has been banned!\nReason: ${reason}`)
 
+        message.channel.send({ embeds: [banEmbed]})
 
-         }
-
-        else { // if time is specified
-            const specreason = args.slice(1).join(" ")
-            let targeteduser = await message.guild.members.fetch(target.id)
-            let guildname = message.guild.name
-            let banuser = new MessageEmbed()
-             .setTitle(`You have been banned from ${guildname}`)
-             .setColor(0xff0000)
-             .setTimestamp()
-             .setDescription(`Reason: ${specreason}`)
-            target.send({ embeds: [banuser]}).then(() => {
-                target.ban({reason: `${specreason}`})
-             });
-
-            let banembed = new MessageEmbed()
-             .setTitle("Ban")
-            .setColor(0xff0000)
-            .setTimestamp()
-            .setDescription(`${target} has been banned!\nReason: ${specreason}`)
-            message.channel.send({ embeds: [banembed]})
-
-        }
-
-
-
-
-
-
-
-
-    } // TESTED AND WORKING!!
-
-
-
-}
+    }
+} // TESTED AND WORKING!!
