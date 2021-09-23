@@ -20,11 +20,34 @@ module.exports = {
             .addField('Name', member.user.username)
             .addField('ID', member.id)
             .addField('isBot', `${member.user.bot}`)
-            .addField('Status', member.presence?.status || 'Offline')
+            .addField('Status', `${getStatusEmoji(member)} | ${member.presence?.status || 'Offline'}`)
             .addField('Activity', activity ? activity.type + ' ' + activity.name : 'None')
             .addField('Created At', member.user.createdAt.toString())
             .addField('Joined At', member.joinedAt.toString())
 
         message.channel.send({ embeds: [embed] })
+    }
+}
+
+function getStatusEmoji(member) {
+    const onlineEmoji = '<:online:890248532173393940>'
+    const idleEmoji = '<:idle:890248898868826143>'
+    const dndEmoji = '<:DND:890248671193600020>'
+    const offlineEmoji = '<:offline:890248794506154046>'
+    
+    if (!member.presence) return offlineEmoji
+
+    switch (member.presence.status) {
+        case 'online':
+            return onlineEmoji
+
+        case 'idle':
+            return idleEmoji
+
+        case 'dnd':
+            return dndEmoji
+
+        default:
+            return offlineEmoji
     }
 }
