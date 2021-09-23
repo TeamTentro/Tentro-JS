@@ -22,8 +22,8 @@ module.exports = {
             .addField('isBot', `${member.user.bot}`)
             .addField('Status', `${getStatusEmoji(member)} | ${member.presence?.status || 'Offline'}`)
             .addField('Activity', activity ? activity.type + ' ' + activity.name : 'None')
-            .addField('Created At', member.user.createdAt.toString())
-            .addField('Joined At', member.joinedAt.toString())
+            .addField('Created At', new Date(member.user.createdTimestamp).toUTCString())
+            .addField('Joined At', new Date(member.joinedTimestamp).toUTCString())
 
         message.channel.send({ embeds: [embed] })
     }
