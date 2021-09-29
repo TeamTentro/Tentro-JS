@@ -17,8 +17,7 @@ yarn
 ```
 ---
 ```sh
-cd scripts
-node .\verify-setup.js
+node scripts/verify-setup.js
 ```
 ## Figure out how to use Tentro
 
