@@ -63,15 +63,15 @@ for (let i = 0; i < client.config.permLevels.length; i++) {
 }
 
  // Connect to the database
-//mongoose.connect(process.env.MONGO_URI, {
-    //useNewUrlParser: true,
-    //useUnifiedTopology: true
-//}).then(() => {
-    //client.log('Load', 'Connected to MongoDB.')
-//}).catch((err) => {
-    //client.log('ERROR','Unable to connect to MongoDB Database.\nError: ' + err)
-//})
-//
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    client.log('Load', 'Connected to MongoDB.')
+}).catch((err) => {
+    client.log('ERROR','Unable to connect to MongoDB Database.\nError: ' + err)
+})
+
  client.on('ready', async () => {  client.log('Ready', 'Tentro is online and active!')
     client.user.setActivity(`${client.guilds.cache.size} servers`, { type: 'WATCHING' });
  })
