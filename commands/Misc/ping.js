@@ -7,12 +7,22 @@ module.exports = {
     usage: "",
     permissions: "EVERYONE",
     exec: async (client, message, args) => {
-        const embed = new MessageEmbed()
-            .setTitle(':ping_pong: Pong!')
-            .setColor('RANDOM')
-            .addField("API Latency", `${message.createdAt - Date.now()}`, true)
-            .addField("Bot Latency", `${client.ws.ping}`, true)
+        message.channel.send('Pinging...')
+        .then(m => {
+            const latency = m.createdTimestamp - message.createdTimestamp
+            const apiLatency = Math.round(client.ws.ping)
+            
+       
+            const embed = new MessageEmbed()
+                .setTitle('Pong!')
+                
+                .addField('Latency', `\`${latency}\`ms`)
+                .addField('API Latency', `\`${apiLatency}\`ms`)
+                .setColor('RANDOM')
+            
+            m.edit({content: null, embeds: [embed]})
+       })
+    }  
 
-        await message.channel.send({embeds: [embed]})
-    }
 }
+
