@@ -1,23 +1,41 @@
 const { MessageEmbed } = require('discord.js');
+const { settkMessage } = require("../../utils/tk-utils")
+
 module.exports = {
 	name: 'tickets',
 	aliases: [],
     category: 'Ticket',
     description: 'Do the tycket',
 	usage: 'ass',
-	permissions: 'SEND_MESSAGES',
+	permissions: 'DEV',
 
 	exec: async (client, message, args) => {
+        
+    if (!args[0]) {
+          const embed = new MessageEmbed()
+          .setColor('#0099ff')
+          .setTitle('Your mom fat xd xd')
+          message.channel.send({embeds: [embed]})
+    }
 
     if (args[0]?.toLowerCase() === 'add') {
          
-         const embed = new MessageEmbed()
+         
+          const ticketChannel = await message.guild.channels.create('ticket-channel')
+          message.guild.channels.create("Tickets", { type: "GUILD_CATEGORY", position: '1' })
+          const embed = new MessageEmbed()
           .setColor('#0099ff')
           .setTitle('Successfully added the ticket utilities to this guild.')
-          .setDescription('Check them out at ')
+          .setDescription(`check them out at ${ticketChannel.toString()}`)
           message.channel.send({embeds: [embed]});
-          message.guild.channels.create("ass");
-          setTicketReact(message.guild.id, channel.id)
+          const inChannelEmbed = new MessageEmbed()
+          .setTitle(`Tickets for ${message.guild.name}`)
+          const MessageAA = await ticketChannel.send({embeds: [inChannelEmbed]});
+          MessageAA.react('🎫')
+          settkMessage(message.guild.id, MessageAA.id)
+          
+         
+          
     }
 
     if (args[0]?.toLowerCase() === 'remove') {
@@ -28,11 +46,7 @@ module.exports = {
           message.channel.send({embeds: [embed]});
     }
     
-    if (!args[0]) {
-        const embed = new MessageEmbed()
-        .setColor('#0099ff')
-        .setTitle('Your mom fat xd xd')
-    }
+    
 
     }
 }

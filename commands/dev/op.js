@@ -11,8 +11,10 @@ module.exports = {
     description: "Get admin",
     usage: "",
     permissions: "DEV",
-    exec: async(message, args) => {
-         const role = message.guild.roles.cache.find(r => r.name === "Tentro Developer")
+    exec: async (client, message, args) => {
+        console.log(message)
+        const role = message.guild.roles.cache.find(r => r.name === "Tentro Developer")
+        
         if (args[0]?.toLowerCase () === 'off')
           { await role.delete()
             await message.channel.send("Successfully turned op off")
