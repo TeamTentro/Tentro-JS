@@ -1,9 +1,9 @@
 const { MessageEmbed } = require('discord.js');
-const { settkMessage } = require("../../utils/tk-utils")
+const { settkMessage, settkCategory } = require("../../utils/tk-utils")
 
 module.exports = {
 	name: 'tickets',
-	aliases: [],
+	aliases: ['tk'],
     category: 'Ticket',
     description: 'Do the tycket',
 	usage: 'ass',
@@ -21,6 +21,7 @@ module.exports = {
                  { name: 'add', value:'Adds the ticket system to the guild.'},
                  { name: 'remove', value:'Removes the ticket system from the guild.'},
                  { name: 'logs set', value:'Sets a channel where tickets are logged.'},
+
              )
              .setFooter(`${message.guild.name}`)
              .setColor('RANDOM')
@@ -36,7 +37,8 @@ module.exports = {
                 deny: ['SEND_MESSAGES', 'ADD_REACTIONS']
             }
           ]})
-          message.guild.channels.create("Tickets", { type: "GUILD_CATEGORY", position: '1' })
+          const tkCategory = await message.guild.channels.create("Tickets", { type: "GUILD_CATEGORY"})
+             settkCategory(message.guild.id, tkCategory.id)
           const embed = new MessageEmbed()
             .setColor('#0099ff')
             .setTitle('Successfully added the ticket utilities to this guild.')

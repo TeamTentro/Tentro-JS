@@ -12,3 +12,15 @@ module.exports.settkMessage = (guildId, MessageId) => {
         }
     })}
 
+module.exports.settkCategory = (guildId, CategoryId) => {
+    Schema.findOne({id: guildId }, async (err, data) => {
+        if (data) {
+            data.tkCategory = CategoryId
+            data.save()
+        } else {
+            data = new Schema({ id: guildId, tkCategory: CategoryId})
+    
+           data.save()
+        }
+    })}
+

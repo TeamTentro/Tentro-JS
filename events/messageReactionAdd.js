@@ -9,6 +9,7 @@ module.exports = async (client, reaction,  user) => {
     
     if (reaction.message.id !== guildData?.tkMessage) return
     reaction.users.remove(user)
+    
     const userticket = await reaction.message.guild.channels.create(`ticket-${user.id}`, {permissionOverwrites: [
         {
             id: user.id,
@@ -23,6 +24,8 @@ module.exports = async (client, reaction,  user) => {
             allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
         }
     ]})
+    userticket.setParent(guildData?.tkCategory, {lockPermissions: false})
+    userticket.setTopic(`Ticket created by ${user}.`)
     const row = new MessageActionRow()
         .addComponents(
            
