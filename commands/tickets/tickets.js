@@ -13,8 +13,17 @@ module.exports = {
         
     if (!args[0]) {
           const embed = new MessageEmbed()
-          .setColor('#0099ff')
-          .setTitle('Your mom fat xd xd')
+             .setTitle('Tentro Ticket System')
+             .setDescription('Welcome to tentro\'s brand new ticket system! Bellow you will get more info on the commands.')
+             .addFields
+             (
+                 { name: 'All commands start with t!ticket', value: '\u200B' },
+                 { name: 'add', value:'Adds the ticket system to the guild.'},
+                 { name: 'remove', value:'Removes the ticket system from the guild.'},
+                 { name: 'logs set', value:'Sets a channel where tickets are logged.'},
+             )
+             .setFooter(`${message.guild.name}`)
+             .setColor('RANDOM')
           message.channel.send({embeds: [embed]})
     }
 
