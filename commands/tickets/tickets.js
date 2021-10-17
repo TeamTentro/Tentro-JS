@@ -37,7 +37,17 @@ module.exports = {
                 deny: ['SEND_MESSAGES', 'ADD_REACTIONS']
             }
           ]})
-          const tkCategory = await message.guild.channels.create("Tickets", { type: "GUILD_CATEGORY"})
+          const tkCategory = await message.guild.channels.create("Tickets", { type: "GUILD_CATEGORY", permissionOverwrites: [
+              {
+                id: message.guild.roles.everyone,
+                deny: ['VIEW_CHANNEL']
+              },
+
+              {
+                id: message.guild.me.id,
+                allow: ['VIEW_CHANNEL']
+              }
+          ]})
              settkCategory(message.guild.id, tkCategory.id)
           const embed = new MessageEmbed()
             .setColor('#0099ff')
