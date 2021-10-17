@@ -7,6 +7,7 @@ module.exports = mongoose.model("Guild", new mongoose.Schema({
     registeredAt: { type: Number, default: Date.now() },
     prefix: { type: String, default: "t!" },
     tkMessage: String, 
+    tkCategory: String,
     addons: { type: Object, default: { // Extra features data
         welcome: {
             enabled: false, // Welcome features are enabled

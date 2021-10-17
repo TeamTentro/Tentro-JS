@@ -21,18 +21,25 @@ module.exports = {
     if (args[0]?.toLowerCase() === 'add') {
          
          
-          const ticketChannel = await message.guild.channels.create('ticket-channel')
+          const ticketChannel = await message.guild.channels.create('ticket-channel', {permissionOverwrites: [
+            {
+                id: message.guild.roles.everyone,
+                deny: ['SEND_MESSAGES', 'ADD_REACTIONS']
+            }
+          ]})
           message.guild.channels.create("Tickets", { type: "GUILD_CATEGORY", position: '1' })
           const embed = new MessageEmbed()
-          .setColor('#0099ff')
-          .setTitle('Successfully added the ticket utilities to this guild.')
-          .setDescription(`check them out at ${ticketChannel.toString()}`)
-          message.channel.send({embeds: [embed]});
+            .setColor('#0099ff')
+            .setTitle('Successfully added the ticket utilities to this guild.')
+            .setDescription(`check them out at ${ticketChannel.toString()}`)
+             message.channel.send({embeds: [embed]});
+
           const inChannelEmbed = new MessageEmbed()
-          .setTitle(`Tickets for ${message.guild.name}`)
+            .setTitle(`Tickets for ${message.guild.name}`)
+
           const MessageAA = await ticketChannel.send({embeds: [inChannelEmbed]});
-          MessageAA.react('🎫')
-          settkMessage(message.guild.id, MessageAA.id)
+              MessageAA.react('🎫')
+              settkMessage(message.guild.id, MessageAA.id)
           
          
           
