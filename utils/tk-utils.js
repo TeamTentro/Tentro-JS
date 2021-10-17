@@ -24,3 +24,16 @@ module.exports.settkCategory = (guildId, CategoryId) => {
         }
     })}
 
+module.exports.settkChannel = (guildId, ChannelId) => {
+    Schema.findOne({id: guildId }, async (err, data) => {
+        if (data) {
+            data.tkChannel = ChannelId
+            data.save()
+        } else {
+            data = new Schema({ id: guildId, tkChannel: ChannelId})
+    
+           data.save()
+        }
+    })}
+
+

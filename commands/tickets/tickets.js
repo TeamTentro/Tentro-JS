@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
-const { settkMessage, settkCategory } = require("../../utils/tk-utils")
+const { settkMessage, settkCategory, settkChannel } = require("../../utils/tk-utils");
+const GuildSchema = require("../../database/Schema/Guild");
 
 module.exports = {
 	name: 'tickets',
@@ -10,7 +11,7 @@ module.exports = {
 	permissions: 'DEV',
 
 	exec: async (client, message, args) => {
-        
+    
     if (!args[0]) {
           const embed = new MessageEmbed()
              .setTitle('Tentro Ticket System')
@@ -31,12 +32,13 @@ module.exports = {
     if (args[0]?.toLowerCase() === 'add') {
          
          
-          const ticketChannel = await message.guild.channels.create('ticket-channel', {permissionOverwrites: [
+          const ticketChannel = await message.guild.channels.create('ticket-create', {permissionOverwrites: [
             {
                 id: message.guild.roles.everyone,
-                deny: ['SEND_MESSAGES', 'ADD_REACTIONS', 'CREATE_PUBLIC_THREADS']
+                deny: ['SEND_MESSAGES', 'ADD_REACTIONS', 'CREATE_PUBLIC_THREADS', 'USE_APPLICATION_COMMANDS', 'CREATE_PRIVATE_THREADS']
             }
           ]})
+             settkChannel(message.guild.id, ticketChannel.id)
           const tkCategory = await message.guild.channels.create("Tickets", { type: "GUILD_CATEGORY", permissionOverwrites: [
               {
                 id: message.guild.roles.everyone,
@@ -67,10 +69,14 @@ module.exports = {
     }
 
     if (args[0]?.toLowerCase() === 'remove') {
+        const guildData = await GuildSchema.findOne({ id: message.guild.id})
         const embed = new MessageEmbed()
           .setColor('#0099ff')
           .setTitle('Successfully removed the ticket utilities from this guild.')
-          
+          const tkCat = await message.guild.channels.fetch(guildData?.tkCategory).catch(() => { const tkCat = null })
+          tkCat?.delete()
+          const tkChannel = await message.guild.channels.fetch(guildData?.tkChannel).catch(() => { const tkChannel = null })
+          tkChannel?.delete()
           message.channel.send({embeds: [embed]});
     }
     
