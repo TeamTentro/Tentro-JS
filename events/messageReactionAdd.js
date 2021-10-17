@@ -8,7 +8,7 @@ module.exports = async (client, reaction,  user) => {
     
     
     if (reaction.message.id !== guildData?.tkMessage) return
-    
+    reaction.users.remove(user)
     const userticket = await reaction.message.guild.channels.create(`ticket-${user.id}`, {permissionOverwrites: [
         {
             id: user.id,
@@ -26,20 +26,20 @@ module.exports = async (client, reaction,  user) => {
     const row = new MessageActionRow()
         .addComponents(
            
-                    new MessageButton()
-                             .setCustomId('claim')
-                             .setLabel('📄 Claim')
-                             .setStyle('SUCCESS'),
+            new MessageButton()
+                    .setCustomId('claim')
+                    .setLabel('📄 Claim')
+                    .setStyle('SUCCESS'),
                     
-                    new MessageButton()
-                            .setCustomId('delete')
-                            .setLabel('🗑️ Delete')
-                            .setStyle('DANGER'),
+            new MessageButton()
+                    .setCustomId('delete')
+                    .setLabel('🗑️ Delete')
+                    .setStyle('DANGER'),
                     
-                    new MessageButton()
-                            .setCustomId('lock')
-                            .setLabel('🔒 Lock')
-                            .setStyle('SECONDARY')
+            new MessageButton()
+                    .setCustomId('lock')
+                    .setLabel('🔒 Lock')
+                    .setStyle('SECONDARY')
                     
 
         );
