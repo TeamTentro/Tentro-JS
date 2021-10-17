@@ -34,7 +34,7 @@ module.exports = {
           const ticketChannel = await message.guild.channels.create('ticket-channel', {permissionOverwrites: [
             {
                 id: message.guild.roles.everyone,
-                deny: ['SEND_MESSAGES', 'ADD_REACTIONS']
+                deny: ['SEND_MESSAGES', 'ADD_REACTIONS', 'CREATE_PUBLIC_THREADS']
             }
           ]})
           const tkCategory = await message.guild.channels.create("Tickets", { type: "GUILD_CATEGORY", permissionOverwrites: [

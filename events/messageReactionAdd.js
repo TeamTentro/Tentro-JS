@@ -1,4 +1,4 @@
-const { MessageEmbed} = require('discord.js')
+const { MessageEmbed } = require('discord.js');
 const { MessageActionRow, MessageButton } = require('discord.js');
 const GuildSchema = require("../database/Schema/Guild");
 module.exports = async (client, reaction,  user) => {
