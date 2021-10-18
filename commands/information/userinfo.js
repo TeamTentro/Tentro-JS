@@ -13,7 +13,8 @@ module.exports = {
         if (!args[0] || member == 'NOT_FOUND') member = message.member || await message.guild.members.fetch(message.author.id)
         
         const activity = member.presence?.activities[1]
-
+        const timestampCreated = Math.round(member.user.createdTimestamp / 1000)
+        const timestampJoined = Math.round(member.joinedTimestamp / 1000)
         const embed = new MessageEmbed()
             .setTitle('User Info')
             .setColor(0xFF0000)
@@ -22,8 +23,9 @@ module.exports = {
             .addField('isBot', `${member.user.bot}`)
             .addField('Status', `${getStatusEmoji(member)} | ${member.presence?.status || 'Offline'}`)
             .addField('Activity', activity ? activity.type + ' ' + activity.name : 'None')
-            .addField('Created At', new Date(member.user.createdTimestamp).toUTCString())
-            .addField('Joined At', new Date(member.joinedTimestamp).toUTCString())
+            .addField('Created at', `<t:${timestampCreated}:D>`)
+            .addField('Joined At', `<t:${timestampJoined}:D>`)
+            .setThumbnail(member.displayAvatarURL())
 
         message.channel.send({ embeds: [embed] })
     }

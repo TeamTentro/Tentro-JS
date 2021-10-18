@@ -8,7 +8,7 @@ module.exports = {
     category: 'Ticket',
     description: 'Do the tycket',
 	usage: 'ass',
-	permissions: 'DEV',
+	permissions: 'ADMINISTRATOR',
 
 	exec: async (client, message, args) => {
     
@@ -76,7 +76,7 @@ module.exports = {
           const tkCat = await message.guild.channels.fetch(guildData?.tkCategory).catch(() => { const tkCat = null })
           tkCat?.delete()
           const tkChannel = await message.guild.channels.fetch(guildData?.tkChannel).catch(() => { const tkChannel = null })
-          tkChannel?.delete()
+          tkChannel?. delete()
           message.channel.send({embeds: [embed]});
     }
     
