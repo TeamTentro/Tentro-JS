@@ -36,4 +36,16 @@ module.exports.settkChannel = (guildId, ChannelId) => {
         }
     })}
 
+module.exports.settkLogChannel = (guildId, ChannelId) => {
+    Schema.findOne({id: guildId }, async (err, data) => {
+        if (data) {
+            data.tkLogChannel = ChannelId
+            data.save()
+        } else {
+            data = new Schema({ id: guildId, tkLogChannel: ChannelId})
+    
+           data.save()
+        }
+    })}
+
 

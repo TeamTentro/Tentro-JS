@@ -9,6 +9,7 @@ module.exports = mongoose.model("Guild", new mongoose.Schema({
     tkChannel: String,
     tkMessage: String, 
     tkCategory: String,
+    tkLogChannel: String,
     addons: { type: Object, default: { // Extra features data
         welcome: {
             enabled: false, // Welcome features are enabled
