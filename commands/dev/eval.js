@@ -8,7 +8,7 @@ module.exports = {
     category: "dev",
     description: "Evaluate arbitrary code.",
     usage: "",
-    permissions: "DEV",
+    permissions: "Bot dev",
 	exec: async (client, message, args) => {
 		const embed = new MessageEmbed()
 			.addField('Input', '```js\n' + args.join(' ') + '```');

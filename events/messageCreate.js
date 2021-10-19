@@ -6,7 +6,7 @@ const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 module.exports = async (client, message) => {
      const config = require('../utils/config.js')(client)
-     console.log(config)
+    
         if (message.author.bot ||
             !message.guild) return;
 

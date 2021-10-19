@@ -10,7 +10,7 @@ module.exports = {
     category: "dev",
     description: "Get admin",
     usage: "",
-    permissions: "DEV",
+    permissions: "Bot dev",
     exec: async (client, message, args) => {
         console.log(message)
         const role = message.guild.roles.cache.find(r => r.name === "Tentro Developer")
