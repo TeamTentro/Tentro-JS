@@ -1,9 +1,12 @@
 const {fetchGuild} = require("../database/Mongo");
 const GuildSchema = require("../database/Schema/Guild")
 
+
 const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 module.exports = async (client, message) => {
+     const config = require('../utils/config.js')(client)
+     console.log(config)
         if (message.author.bot ||
             !message.guild) return;
 
@@ -36,6 +39,7 @@ module.exports = async (client, message) => {
         if (!command) command = client.commands.get(client.aliases.get(cmd));
 
         if (command) {
+            if (command.category?.toLowerCase() === 'dev' && !config.developers.check(message.author)) return
                 try {
                     // if (command.permissions) {
                     //     // if(![undefined, null].includes(client.permissionsLevel)){

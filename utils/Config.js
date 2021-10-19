@@ -1,7 +1,7 @@
 const {Message, GuildMember} = require("discord.js");
 module.exports = (client) => {
     return {
-        prefix: "!",
+        prefix: "t!",
 
         owners: {
             members: [
@@ -37,10 +37,7 @@ module.exports = (client) => {
             members: [
                 "804970459561066537",
                 "620690744897699841",
-                "734784924619505774",
                 "391936025598885891",
-                "826793093549785099",
-                "424921488043540491",
                 "668423998777982997"
             ],
 
