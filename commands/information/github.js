@@ -19,7 +19,7 @@ module.exports = {
                    .setStyle('LINK')
                    .setURL('https://discord.js.org/#/docs/main/stable/general/welcome')
 
-       ),
+       )
        const embed = new MessageEmbed()
          .setTitle('Tentro\'s github repository')
          .setDescription('Check out Tentro\'s github repo by clicking on the button bellow')
