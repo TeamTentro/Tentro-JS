@@ -8,7 +8,7 @@ module.exports = {
     category: "information",
     description: "Returns all commands, or one specific command info",
     usage: "[command | alias]",
-    permissionLevel: "Bot Dev",
+    permissionLevel: "EVERYONE",
     exec: async (client, message, args) => {
         if (args[0]) {
             return getCMD(client, message, args[0]);

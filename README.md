@@ -10,12 +10,15 @@
 
 ### 🏠 [Homepage](https://discord.gg/zyms32wdgd)
 
-## Install
+## Development
 
 ```sh
-yarn install
+yarn
 ```
-
+---
+```sh
+node scripts/verify-setup.js
+```
 ## Figure out how to use Tentro
 
 ```
@@ -26,7 +29,7 @@ t!help
 
 👤 **Tentro Dev Team**
 
-* Website: https://discord.gg/zyms32wdgd
+* Support Server: https://discord.gg/zyms32wdgd
 * Github: [@TentroBot](https://github.com/TentroBot)
 
 ## Show your support

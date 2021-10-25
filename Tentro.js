@@ -12,9 +12,10 @@ const client = new Client({
         Intents.FLAGS.GUILD_INVITES,
         Intents.FLAGS.GUILD_MESSAGES,
         Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-        Intents.FLAGS.GUILD_MEMBERS
+        Intents.FLAGS.GUILD_MEMBERS,
+        Intents.FLAGS.GUILD_PRESENCES
     ],
-    allowedMentions: ["roles", "users"],
+    allowedMentions: { parse: ["roles", "users"] },
     partials: ['USER', 'CHANNEL', 'GUILD_MEMBER', 'MESSAGE', 'REACTION']
 });
 
@@ -70,11 +71,9 @@ mongoose.connect(process.env.MONGO_URI, {
 }).catch((err) => {
     client.log('ERROR','Unable to connect to MongoDB Database.\nError: ' + err)
 })
-//
-// client.on('ready', async () => {
-//     client.log('Ready', 'Tentro is online and active!')
-//     client.user.setActivity(`${client.guilds.cache.size} servers`, { type: 'WATCHING' });
-//
-// })
+
+ client.on('ready', async () => {  client.log('Ready', 'Tentro is online and active!')
+    client.user.setActivity(`${client.guilds.cache.size} servers`, { type: 'WATCHING' });
+ })
 
 client.login(process.env.TOKEN);

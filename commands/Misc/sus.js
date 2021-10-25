@@ -10,25 +10,12 @@ module.exports = {
 
         const target = message.mentions.members.first() || await message.guild.members.fetch(args[0])
         const result = Math.floor(Math.random() * 100)
-        if (!args[0]) {
-            const susmeter1 = new MessageEmbed()
+        
+        const susMeter = new MessageEmbed()
             .setColor(0xff0000)
             .setTitle("Sus'ometer")
-            .setDescription(`${message.author.username} is ${result}% sus`)
-            message.channel.send({ embeds: [susmeter1] })
-        } else {
-            const susmeter = new MessageEmbed()
-            .setColor(0xff0000)
-            .setTitle("Sus'ometer")
-            .setDescription(`${target.user.username}, is ${result}% sus`)
-            message.channel.send({ embeds: [susmeter] })
-        }
-    
-
-
-
-
-
+            .setDescription(`${(!target || !args[0]) ? message.author.username : target.user.username} is ${result}% sus`)
+            
+        message.channel.send({ content: result === 69 ? null : 'https://youtu.be/O4UeUfNPKAk', embeds: [susMeter] })
     }
-
 }

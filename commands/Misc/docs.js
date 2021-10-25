@@ -14,7 +14,7 @@ module.exports = {
                             .setEmoji('📄')
                             .setLabel('discord.js docs')
                             .setStyle('LINK')
-                            .setURL('https://discord.js.org/#/docs/main/stable')
+                            .setURL('https://discord.js.org/#/docs/main/stable/general/welcome')
         );
         const embed = new MessageEmbed()
             .setTitle('discord.js docs')

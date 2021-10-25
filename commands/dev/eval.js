@@ -8,7 +8,7 @@ module.exports = {
     category: "dev",
     description: "Evaluate arbitrary code.",
     usage: "",
-    permissions: "DEV",
+    permissions: "Bot dev",
 	exec: async (client, message, args) => {
 		const embed = new MessageEmbed()
 			.addField('Input', '```js\n' + args.join(' ') + '```');
@@ -21,7 +21,7 @@ module.exports = {
 			);
 		}
 
-		const words = ['secret', 'token', 'process.env', 'config.json'];
+		const words = ['secret', 'token', 'process.env', 'config.json', 'fs', 'ip'];
 		for(const word of words) {
 			if (code.replace('\\', '').toLowerCase().includes(word)) {
 				embed.setTitle('Error!');
