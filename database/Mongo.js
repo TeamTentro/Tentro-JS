@@ -4,6 +4,7 @@ const userSchema = require("./Schema/User.js");
 const guildSchema = require("./Schema/Guild.js");
 const memberSchema = require("./Schema/Member.js");
 const logSchema = require("./Schema/Log.js");
+const Prefix = require("./Schema/Prefix.js");
 
 /**
  * Creates / Finds a user by their snowflake in the user database.
@@ -24,9 +25,9 @@ module.exports.fetchUser = async function(userID){
         return userDB;
     }
 };
-
-/**
- * Creates / Find a guild by the guild snowflake in the guild databse
+ //fuck ass
+/** FUCK THIS  THEME HONESTLy
+ * Creates / Find a guild by the guild snowflake in the guild database
  * @param {Snowflake} guildID
  * @returns {Promise<*|Document<any, any, unknown>>}
  */
@@ -70,7 +71,7 @@ module.exports.fetchMember = async function(userID, guildID){
 
 /**
  * Creates / Finds logs in the Log database
- * These logs contain command usuage data
+ * These logs contain command usage data
  * @param {Message} message
  * @param {data: {command: Command}} data
  * @returns {Promise<Document>} Log Document
