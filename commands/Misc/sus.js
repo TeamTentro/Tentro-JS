@@ -16,6 +16,6 @@ module.exports = {
             .setTitle("Sus'ometer")
             .setDescription(`${(!target || !args[0]) ? message.author.username : target.user.username} is ${result}% sus`)
             
-        message.channel.send({ content: result === 69 ? null : 'https://youtu.be/O4UeUfNPKAk', embeds: [susMeter] })
+        message.channel.send({embeds: [susMeter] })
     }
 }

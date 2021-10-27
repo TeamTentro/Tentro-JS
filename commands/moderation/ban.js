@@ -12,8 +12,8 @@ module.exports = {
             setTimeout(() => msg.delete(), 5000)})
         
         let target = await client.getMember(message, args[0]);
-        console.log(target);
-        if(!target || target === "NOT_FOUND") return message.reply("boi something is wrong.");
+        console.log(target.id);
+        if(!target || target === "NOT_FOUND" || !args[0]) return message.reply("boi something is wrong.");
 
         if (target.permissions.has("ADMINISTRATOR")||(target.permissions.has("BAN_MEMBERS"))) return message.channel.send("You cant ban users with your permissions or higher!").then(msg => {
             setTimeout(() => msg.delete(), 5000)})
