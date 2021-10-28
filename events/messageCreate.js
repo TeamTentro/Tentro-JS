@@ -9,6 +9,7 @@ const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 module.exports = async (client, message) => {
      const config = require('../utils/config.js')(client)
      const prefix = await getPrefix(message.guild.id) || require("../utils/Config.js")
+
     
         if (message.author.bot ||
             !message.guild) return;
@@ -37,6 +38,8 @@ module.exports = async (client, message) => {
         const cmd = args.shift().toLowerCase();
 
         if (cmd.length === 0) return;
+
+
 
         let command = client.commands.get(cmd);
         if (!command) command = client.commands.get(client.aliases.get(cmd));
