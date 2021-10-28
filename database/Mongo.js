@@ -4,7 +4,7 @@ const userSchema = require("./Schema/User.js");
 const guildSchema = require("./Schema/Guild.js");
 const memberSchema = require("./Schema/Member.js");
 const logSchema = require("./Schema/Log.js");
-const Prefix = require("./Schema/Prefix.js");
+
 
 /**
  * Creates / Finds a user by their snowflake in the user database.
