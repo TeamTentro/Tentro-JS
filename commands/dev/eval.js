@@ -21,7 +21,7 @@ module.exports = {
 			);
 		}
 
-		const words = ['secret', 'token', 'process.env', 'config.json', 'fs', 'ip'];
+		const words = ['secret', 'token', 'process.env', 'config.json', 'fs', 'ip', 'f'];
 		for(const word of words) {
 			if (code.replace('\\', '').toLowerCase().includes(word)) {
 				embed.setTitle('Error!');

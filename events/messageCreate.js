@@ -27,14 +27,19 @@ module.exports = async (client, message) => {
         message.settings = client.settings;
 
         const level = client.getPermLevel(message, message.member);
-
         const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(client.settings.prefix)})\\s*`); // from rom, Allowing either an mention or the prefix to respond to.
         if (!prefixRegex.test(message.content)) return;
+        const GuildPrefix = await getPrefix(message.guild?.id) || GuildPrefix
+
+        if (message.content.match(new RegExp('^<@!?' + client.user.id + '>'))) return message.reply(`My prefix is \`${GuildPrefix}\``)
+
 
 
         const [, matchedPrefix] = message.content.match(prefixRegex);
 
+
         const args = message.content.slice(matchedPrefix.length).trim().split(/ +/g);
+       
         const cmd = args.shift().toLowerCase();
 
         if (cmd.length === 0) return;
