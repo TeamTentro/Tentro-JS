@@ -79,8 +79,12 @@ module.exports = async (client, message) => {
                     // }
                 } catch (e) {
                     console.log(e);
+
+
                 }
-            }
+            } else {
+            message.channel.send('Invalid command!')
+        }
 };
 
 
