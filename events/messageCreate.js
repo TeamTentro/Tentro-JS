@@ -26,28 +26,25 @@ module.exports = async (client, message) => {
             .populate("addons");
         message.settings = client.settings;
 
-        const level = client.getPermLevel(message, message.member);
-        const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(client.settings.prefix)})\\s*`); // from rom, Allowing either an mention or the prefix to respond to.
-        if (!prefixRegex.test(message.content)) return;
         const GuildPrefix = await getPrefix(message.guild?.id) || GuildPrefix
-
-        if (message.content.match(new RegExp('^<@!?' + client.user.id + '>'))) return message.reply(`My prefix is \`${GuildPrefix}\``)
+        const level = client.getPermLevel(message, message.member);
+        const mentionBot = new RegExp(`^(<@!?${client.user.id}>)`)
+        const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(GuildPrefix)})\\s*`); // from rom, Allowing either an mention or the prefix to respond to.
+        if (!prefixRegex.test(message.content) ) return
 
 
 
         const [, matchedPrefix] = message.content.match(prefixRegex);
 
-
         const args = message.content.slice(matchedPrefix.length).trim().split(/ +/g);
        
         const cmd = args.shift().toLowerCase();
 
-        if (cmd.length === 0) return;
-
-
+        if (cmd.length === 0) return message.channel.send(`My prefix is for this guild is \`${GuildPrefix}\``);
 
         let command = client.commands.get(cmd);
         if (!command) command = client.commands.get(client.aliases.get(cmd));
+
 
         if (command) {
             if (command.category?.toLowerCase() === 'dev' && !config.developers.check(message.author)) return

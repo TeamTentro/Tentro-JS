@@ -2,7 +2,10 @@ const { MessageEmbed } = require('discord.js');
 const { settkMessage, settkCategory, settkChannel } = require("../../utils/tk-utils");
 const GuildSchema = require("../../database/Schema/Guild");
 
+
+
 module.exports = {
+
 	name: 'tickets',
 	aliases: ['tk'],
     category: 'Ticket',
